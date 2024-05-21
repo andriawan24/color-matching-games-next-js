@@ -23,8 +23,7 @@ export default function Results() {
 
   return (
     <main className="flex min-h-screen flex-col justify-center items-center gap-4 sm:gap-8 py-10">
-      <Image width={89} height={102} loading="lazy" src={'/images/star.png'} className="absolute top-[71px] left-[10px] sm:left-[152px]" alt="Star Image" />
-      <Image width={89} height={102} loading="lazy" src={'/images/star.png'} className="absolute sm:hidden top-[71px] right-[10px] sm:left-[152px]" alt="Star Image" />
+      <Image width={89} height={102} loading="lazy" src={'/images/star.png'} className="hidden sm:block sm:absolute top-[71px] left-[10px] sm:left-[152px]" alt="Star Image" />
       <Image width={89} height={102} loading="lazy" src={'/images/star.png'} className="hidden sm:block sm:absolute bottom-[89px] right-[148px]" alt="Star Image" />
       <h1 className="text-4xl sm:text-7xl font-semibold text-primary">Overall Score</h1>
       <div className={`bg-white p-12 px-2 sm:px-16 sm:py-8 rounded-2xl border-[16px] border-primary mt-4 mx-4 relative`}>

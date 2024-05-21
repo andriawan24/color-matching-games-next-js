@@ -110,9 +110,12 @@ export default function Play(): ReactElement {
         <button 
           onClick={() => {
             if (pageType == PageType.PLAY) {
-              const result = calculateColorMatch();
-              setScores([...scores, result]);
-              // setPageType(PageType.SCORE)
+              try {
+                const result = calculateColorMatch();
+                setScores([...scores, result]);
+              } catch (e) {
+                setScores([...scores, 0]);
+              }
             } else {
               if (currentNumber == 5) {
                 localStorage.setItem('scores', scores.join(','));
