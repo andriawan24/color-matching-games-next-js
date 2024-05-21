@@ -12,8 +12,8 @@ export default function Home() {
       <h1 className="text-4xl sm:text-7xl font-semibold text-primary">Let&lsquo;s Play!</h1>
       <button 
         onClick={() => {
-          const scores = localStorage.getItem('scores') ?? ''
-          if (scores == '') {
+          const scores = localStorage.getItem('scores') || ''
+          if (scores === '') {
             router.push('/play')
           } else {
             router.push('/results')
