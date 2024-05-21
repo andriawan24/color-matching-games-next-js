@@ -74,8 +74,8 @@ export default function Play(): ReactElement {
   }, [currentScore]);
 
   return (
-    <main className="min-h-screen flex flex-col items-center justify-center py-10 px-24">
-      <h1 className="text-2xl sm:text-6xl font-semibold text-primary uppercase">
+    <main className="min-h-screen flex flex-col items-center justify-center py-10 px-4 sm:px-24">
+      <h1 className="text-2xl sm:text-6xl font-semibold text-primary uppercase text-center">
         {pageType == PageType.PLAY ? "match the color" : "your score is"} 
       </h1>
       <div className={`w-full bg-white p-12 sm:px-36 sm:py-${pageType == PageType.PLAY ? '24' : '20'} rounded-2xl border-[16px] border-primary mt-14 mx-4 relative`}>
@@ -87,7 +87,7 @@ export default function Play(): ReactElement {
             </div>
             <div className="flex flex-col sm:flex-row gap-8 sm:gap-36 items-center justify-center">
               <div className="flex flex-col items-center gap-4">
-                <h3 className="text-black text-2xl uppercase font-semibold text-center">Your Palette {userColor}</h3>
+                <h3 className="text-black text-2xl uppercase font-semibold text-center">Your Palette</h3>
                 <div ref={userRef} className={`sm:w-64 sm:h-64 w-48 h-48 rounded-full bg-[${userColor}]`} />
               </div>
               <div className="flex flex-col items-center gap-4">
@@ -103,8 +103,8 @@ export default function Play(): ReactElement {
         )}
         
         {pageType == PageType.SCORE && (
-          <div className="w-full text-center">
-            <h3 className="text-black text-[200px] font-semibold">{currentScore}%</h3>
+          <div className="w-full text-center mb-10">
+            <h3 className="text-black text-7xl sm:text-[200px] font-semibold">{currentScore}%</h3>
           </div>
         )}
         <button 
@@ -124,7 +124,7 @@ export default function Play(): ReactElement {
               }
             }
           }}
-          className="w-full bg-gradient-to-r from-btn-background-from to-btn-background-to hover:from-btn-background-hover-from hover:to-btn-background-hover-to active:opacity-100 transition-all duration-200 text-black py-2 px-16 font-bold text-lg sm:text-[20px] rounded-xl"
+          className="w-full bg-gradient-to-r from-btn-background-from to-btn-background-to hover:from-btn-background-hover-from hover:to-btn-background-hover-to active:opacity-100 transition-all duration-200 text-black py-2 px-4 sm:px-16 font-bold text-lg sm:text-[20px] rounded-xl"
         >
           {pageType == PageType.PLAY ? 'Check my score' : currentNumber == 5 ? 'Check my overall score' : 'Next question'}
         </button>
