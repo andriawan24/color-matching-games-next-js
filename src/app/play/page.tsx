@@ -67,12 +67,6 @@ export default function Play(): ReactElement {
     }
   }, [scores]);
 
-  useEffect(() => {
-    if (currentScore != undefined) {
-      setPageType(PageType.SCORE);
-    }
-  }, [currentScore]);
-
   return (
     <main className="min-h-screen flex flex-col items-center justify-center py-10 px-4 sm:px-24">
       <h1 className="text-2xl sm:text-6xl font-semibold text-primary uppercase text-center">
@@ -114,8 +108,10 @@ export default function Play(): ReactElement {
                 const result = calculateColorMatch();
                 setScores([...scores, result]);
               } catch (e) {
+                console.log(e)
                 setScores([...scores, 0]);
               }
+              setPageType(PageType.SCORE);
             } else {
               if (currentNumber == 5) {
                 localStorage.setItem('scores', scores.join(','));
