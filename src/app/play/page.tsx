@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { ReactElement, useEffect, useRef, useState } from "react";
 
 enum PageType { PLAY, SCORE }
-const colors = ["#FF7B00", "#FFF500", "#01D1DE", "#EF7474", "#52FF00"]
+const colors = ["#FF7B00", "#FFE500", "#3300FF", "#50FF00", "#FF0098"];
 interface RGB {
   r: number,
   g: number,
@@ -87,7 +87,7 @@ export default function Play(): ReactElement {
             </div>
             <div className="flex flex-col sm:flex-row gap-8 sm:gap-36 items-center justify-center">
               <div className="flex flex-col items-center gap-4">
-                <h3 className="text-black text-2xl uppercase font-semibold text-center">Your Palette</h3>
+                <h3 className="text-black text-2xl uppercase font-semibold text-center">Your Palette {userColor}</h3>
                 <div ref={userRef} className={`sm:w-64 sm:h-64 w-48 h-48 rounded-full bg-[${userColor}]`} />
               </div>
               <div className="flex flex-col items-center gap-4">

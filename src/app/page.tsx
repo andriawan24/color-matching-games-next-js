@@ -12,7 +12,12 @@ export default function Home() {
       <h1 className="text-4xl sm:text-7xl font-semibold text-primary">Let&lsquo;s Play!</h1>
       <button 
         onClick={() => {
-          router.push('/play')
+          const scores = localStorage.getItem('scores') ?? ''
+          if (scores == '') {
+            router.push('/play')
+          } else {
+            router.push('/results')
+          }
         }}
         className="bg-gradient-to-r from-btn-background-from to-btn-background-to hover:from-btn-background-hover-from hover:to-btn-background-hover-to active:opacity-100 transition-all duration-200 text-black py-2 px-16 font-bold text-lg sm:text-[20px] rounded-xl"
       >
