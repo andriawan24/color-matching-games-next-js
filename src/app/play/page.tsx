@@ -13,9 +13,12 @@ interface RGB {
 }
 
 export default function Play(): ReactElement {
+  const userRef = useRef<HTMLDivElement>(null);
+  const expectedRef = useRef<HTMLDivElement>(null);
+  const buttonAudioRef = useRef<HTMLAudioElement>(null);
+  const buttonFinishAudioRef = useRef<HTMLAudioElement>(null);
+
   const [userColor, setUserColor] = useState('#01D1DE');
-  const userRef = useRef<HTMLDivElement>(null)
-  const expectedRef = useRef<HTMLDivElement>(null)
   const [currentNumber, setCurrentNumber] = useState(1);
   const [pageType, setPageType] = useState(PageType.PLAY);
   const [scores, setScores] = useState<number[]>([]);
@@ -69,6 +72,8 @@ export default function Play(): ReactElement {
 
   return (
     <main className="min-h-screen flex flex-col items-center justify-center py-10 px-4 sm:px-24">
+      <audio src="/audio/tap-notification.mp3" autoPlay={false} ref={buttonAudioRef} />
+      <audio src="/audio/tap-finish-notification.mp3" autoPlay={false} ref={buttonFinishAudioRef} />
       <h1 className="text-2xl sm:text-6xl font-semibold text-primary uppercase text-center">
         {pageType == PageType.PLAY ? "match the color" : "your score is"} 
       </h1>
@@ -102,24 +107,33 @@ export default function Play(): ReactElement {
           </div>
         )}
         <button 
-          onClick={() => {
+          onClick={async () => {
             if (pageType == PageType.PLAY) {
-              try {
-                const result = calculateColorMatch();
-                setScores([...scores, result]);
-              } catch (e) {
-                console.log(e)
-                setScores([...scores, 0]);
-              }
-              setPageType(PageType.SCORE);
+              await buttonAudioRef.current?.play();
+              setTimeout(() => {
+                try {
+                  const result = calculateColorMatch();
+                  setScores([...scores, result]);
+                } catch (e) {
+                  console.log(e)
+                  setScores([...scores, 0]);
+                }
+                setPageType(PageType.SCORE);
+              }, 100);
             } else {
               if (currentNumber == 5) {
-                localStorage.setItem('scores', scores.join(','));
-                localStorage.setItem('colors', colors.join(','));
-                router.replace('/results');
+                await buttonFinishAudioRef.current?.play();
+                setTimeout(() => {
+                  localStorage.setItem('scores', scores.join(','));
+                  localStorage.setItem('colors', colors.join(','));
+                  router.replace('/results');
+                }, 1200);
               } else {
-                setCurrentNumber(currentNumber+1);
-                setPageType(PageType.PLAY)
+                await buttonAudioRef.current?.play();
+                setTimeout(() => {
+                  setCurrentNumber(currentNumber+1);
+                  setPageType(PageType.PLAY)
+                }, 100);
               }
             }
           }}
